@@ -617,6 +617,20 @@
 
     mostrarPoemas();
   </script>
+  
+<!-- Conexión de Poems_nath con Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+  const SUPABASE_URL = 'https://bxgcdqfcrjmyokuesiah.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1wS';
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  console.log('Poems_nath: conexión preparada con Supabase');
+</script>
 </body>
 </html>
