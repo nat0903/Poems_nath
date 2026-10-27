@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Versos en la Oscuridad</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fondo: #100d10;
+      --panel: #191318;
+      --rojo: #a83d50;
+      --texto: #eee5e7;
+      --suave: #a99ba2;
+      --borde: #38252e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "DM Sans", sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 27px;
+      color: #e7bdc6;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--rojo);
+    }
+
+    nav a {
+      color: var(--suave);
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 13px;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      padding: 85px 20px 60px;
+      text-align: center;
+    }
+
+    .etiqueta {
+      color: #d77d91;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 10px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(44px, 7vw, 76px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin: 20px 0;
+    }
+
+    h1 em {
+      color: #c56b81;
+      font-weight: 400;
+    }
+
+    .hero p {
+      color: var(--suave);
+      max-width: 440px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+
+    .principal {
+      background: var(--rojo);
+      border: 1px solid var(--rojo);
+      color: white;
+      padding: 13px 24px;
+      border-radius: 3px;
+    }
+
+    .principal:hover {
+      background: #c15368;
+    }
+
+    .contenedor {
+      max-width: 1050px;
+      margin: auto;
+      padding: 25px 24px 80px;
+    }
+
+    .barra {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--borde);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      font-size: 32px;
+    }
+
+    #busqueda {
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      padding: 12px 15px;
+      color: white;
+      border-radius: 3px;
+      outline: none;
+      width: min(100%, 260px);
+    }
+
+    #busqueda:focus, textarea:focus, input:focus {
+      border-color: var(--rojo);
+    }
+
+    .rejilla {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .poema {
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      padding: 25px;
+      min-height: 235px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+
+    .poema:hover {
+      border-color: #89505e;
+      transform: translateY(-3px);
+    }
+
+    .poema .categoria {
+      color: #d77d91;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .poema h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 27px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .fragmento {
+      color: #c2b5bc;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.6;
+      white-space: pre-line;
+      margin-bottom: 22px;
+    }
+
+    .autor {
+      color: var(--suave);
+      font-size: 12px;
+      margin-top: auto;
+    }
+
+    .vacio {
+      color: var(--suave);
+      text-align: center;
+      padding: 50px 10px;
+      grid-column: 1 / -1;
+      line-height: 1.8;
+    }
+
+    footer {
+      border-top: 1px solid var(--borde);
+      text-align: center;
+      padding: 30px;
+      color: var(--suave);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 17px;
+      font-style: italic;
+    }
+
+    dialog {
+      background: var(--panel);
+      color: var(--texto);
+      border: 1px solid var(--borde);
+      padding: 30px;
+      width: min(92%, 520px);
+      max-height: 85vh;
+      overflow-y: auto;
+      margin: auto;
+    }
+
+    dialog::backdrop {
+      background: #000b;
+      backdrop-filter: blur(4px);
+    }
+
+    dialog h2 {
+      margin-bottom: 22px;
+    }
+
+    .campo {
+      margin-bottom: 17px;
+    }
+
+    .campo label {
+      display: block;
+      color: #d9a4b0;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .campo input, .campo textarea, .campo select {
+      width: 100%;
+      background: var(--fondo);
+      color: white;
+      border: 1px solid var(--borde);
+      padding: 12px;
+      font: inherit;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .campo textarea {
+      resize: vertical;
+      min-height: 180px;
+      line-height: 1.6;
+    }
+
+    .acciones {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .secundario {
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--texto);
+      padding: 12px 18px;
+    }
+
+    #lectura {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 21px;
+      line-height: 1.9;
+      color: #e5d6dc;
+      margin: 20px 0;
+    }
+
+    #lecturaAutor {
+      color: #d77d91;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 760px) {
+      .rejilla {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      header {
+        padding: 20px;
+      }
+
+      nav a {
+        margin-left: 10px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .rejilla {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      .logo {
+        font-size: 21px;
+      }
+
+      nav a {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="logo" href="#" style="text-decoration:none">
+      versos<span>.</span>
+    </a>
+
+    <nav>
+      <a href="#poemas">Poemas</a>
+      <a href="#publicar" id="enlacePublicar">Publicar</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="etiqueta">Un refugio para las palabras</span>
+
+    <h1>Lo que callamos,<br><em>lo escribimos.</em></h1>
+
+    <p>
+      Un rincón para los sentimientos que no sabemos explicar,
+      las historias que no contamos y las palabras que merecen existir.
+    </p>
+
+    <button class="principal" id="abrirFormulario">
+      + Escribe tu poema
+    </button>
+  </section>
+
+  <main class="contenedor" id="poemas">
+    <div class="barra">
+      <h2>Versos recientes</h2>
+      <input
+        type="search"
+        id="busqueda"
+        placeholder="Buscar un poema..."
+        aria-label="Buscar poemas"
+      >
+    </div>
+
+    <section class="rejilla" id="listaPoemas"></section>
+  </main>
+
+  <footer>
+    "A veces, escribir es la única forma de decir la verdad."
+  </footer>
+
+  <!-- Formulario para publicar -->
+  <dialog id="formulario">
+    <h2>Deja tus palabras aquí.</h2>
+
+    <form id="formPoema">
+      <div class="campo">
+        <label for="titulo">Título del poema</label>
+        <input id="titulo" maxlength="100" required
+          placeholder="Ej. Lo que nunca te dije">
+      </div>
+
+      <div class="campo">
+        <label for="autor">Nombre o seudónimo</label>
+        <input id="autor" maxlength="60" required
+          placeholder="Ej. Anónimo">
+      </div>
+
+      <div class="campo">
+        <label for="categoria">Categoría</label>
+        <select id="categoria">
+          <option>Amor</option>
+          <option>Desamor</option>
+          <option>Tristeza</option>
+          <option>Soledad</option>
+          <option>Reflexión</option>
+          <option>Otros</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="contenido">Tu poema</label>
+        <textarea id="contenido" maxlength="10000" required
+          placeholder="Escribe desde el corazón..."></textarea>
+      </div>
+
+      <div class="acciones">
+        <button type="button" class="secundario"
+          id="cancelar">Cancelar</button>
+        <button type="submit" class="principal">
+          Publicar poema
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Ventana para leer un poema completo -->
+  <dialog id="ventanaLectura">
+    <span class="etiqueta" id="lecturaCategoria"></span>
+    <h2 id="lecturaTitulo"></h2>
+    <p id="lecturaAutor"></p>
+    <div id="lectura"></div>
+
+    <div class="acciones">
+      <button class="secundario" id="cerrarLectura">
+        Cerrar
+      </button>
+    </div>
+  </dialog>
+
+  <script>
+    const formulario = document.getElementById("formulario");
+    const formPoema = document.getElementById("formPoema");
+    const ventanaLectura = document.getElementById("ventanaLectura");
+    const listaPoemas = document.getElementById("listaPoemas");
+    const busqueda = document.getElementById("busqueda");
+
+    // Poemas de ejemplo
+    const ejemplos = [
+      {
+        id: "ejemplo-1",
+        titulo: "A quien ya no está",
+        autor: "Anónimo",
+        categoria: "Desamor",
+        contenido: "Todavía hablo contigo\ncuando nadie puede escucharme.\nNo porque espere una respuesta,\nsino porque olvidarte\nes más difícil que extrañarte."
+      },
+      {
+        id: "ejemplo-2",
+        titulo: "Medianoche",
+        autor: "Luna Roja",
+        categoria: "Soledad",
+        contenido: "La noche conoce secretos\nque el día jamás sabrá.\nHay pensamientos que florecen\ncuando todo deja de hablar."
+      },
+      {
+        id: "ejemplo-3",
+        titulo: "Lo que fuimos",
+        autor: "Sin firma",
+        categoria: "Reflexión",
+        contenido: "Fuimos una historia breve,\npero no una historia vacía.\nHay personas que se marchan\ny aun así nos cambian la vida."
+      }
+    ];
+
+    // Cada navegador mantiene sus propios poemas.
+    let poemas = cargarPoemas();
+
+    function cargarPoemas() {
+      try {
+        const guardados = localStorage.getItem("versosPoemas");
+        return guardados === null ? ejemplos : JSON.parse(guardados);
+      } catch {
+        return ejemplos;
+      }
+    }
+
+    function guardarPoemas() {
+      try {
+        localStorage.setItem("versosPoemas", JSON.stringify(poemas));
+        return true;
+      } catch {
+        alert("No se pudieron guardar los poemas. Revisa el almacenamiento del navegador.");
+        return false;
+      }
+    }
+
+    function crearElemento(tag, clase, texto) {
+      const elemento = document.createElement(tag);
+      if (clase) elemento.className = clase;
+      if (texto !== undefined) elemento.textContent = texto;
+      return elemento;
+    }
+
+    function mostrarPoemas(filtro = "") {
+      listaPoemas.replaceChildren();
+
+      const consulta = filtro.toLocaleLowerCase("es");
+
+      const encontrados = poemas.filter(poema =>
+        [poema.titulo, poema.autor, poema.categoria, poema.contenido]
+          .some(valor => valor.toLocaleLowerCase("es").includes(consulta))
+      );
+
+      if (encontrados.length === 0) {
+        listaPoemas.append(
+          crearElemento("p", "vacio",
+            "No encontramos poemas.\nQuizás sea hora de escribir el primero.")
+        );
+        return;
+      }
+
+      encontrados.forEach(poema => {
+        const tarjeta = crearElemento("article", "poema");
+        tarjeta.tabIndex = 0;
+        tarjeta.setAttribute("role", "button");
+        tarjeta.setAttribute("aria-label", "Leer " + poema.titulo);
+
+        tarjeta.append(
+          crearElemento("span", "categoria", poema.categoria),
+          crearElemento("h3", "", poema.titulo),
+          crearElemento("p", "fragmento",
+            poema.contenido.length > 150
+              ? poema.contenido.slice(0, 150) + "…"
+              : poema.contenido),
+          crearElemento("span", "autor", "Por " + poema.autor)
+        );
+
+        tarjeta.addEventListener("click", () => leerPoema(poema));
+
+        tarjeta.addEventListener("keydown", evento => {
+          if (evento.key === "Enter" || evento.key === " ") {
+            evento.preventDefault();
+            leerPoema(poema);
+          }
+        });
+
+        listaPoemas.append(tarjeta);
+      });
+    }
+
+    function leerPoema(poema) {
+      document.getElementById("lecturaCategoria").textContent =
+        poema.categoria;
+      document.getElementById("lecturaTitulo").textContent =
+        poema.titulo;
+      document.getElementById("lecturaAutor").textContent =
+        "Escrito por " + poema.autor;
+      document.getElementById("lectura").textContent =
+        poema.contenido;
+
+      ventanaLectura.showModal();
+    }
+
+    function abrirFormulario() {
+      formulario.showModal();
+    }
+
+    document.getElementById("abrirFormulario")
+      .addEventListener("click", abrirFormulario);
+
+    document.getElementById("enlacePublicar")
+      .addEventListener("click", evento => {
+        evento.preventDefault();
+        abrirFormulario();
+      });
+
+    document.getElementById("cancelar")
+      .addEventListener("click", () => formulario.close());
+
+    document.getElementById("cerrarLectura")
+      .addEventListener("click", () => ventanaLectura.close());
+
+    busqueda.addEventListener("input", () => {
+      mostrarPoemas(busqueda.value);
+    });
+
+    formPoema.addEventListener("submit", evento => {
+      evento.preventDefault();
+
+      const nuevoPoema = {
+        id: crypto.randomUUID(),
+        titulo: document.getElementById("titulo").value.trim(),
+        autor: document.getElementById("autor").value.trim(),
+        categoria: document.getElementById("categoria").value,
+        contenido: document.getElementById("contenido").value.trim()
+      };
+
+      if (!nuevoPoema.titulo ||
+          !nuevoPoema.autor ||
+          !nuevoPoema.contenido) {
+        return;
+      }
+
+      poemas.unshift(nuevoPoema);
+
+      if (!guardarPoemas()) {
+        poemas.shift();
+        return;
+      }
+
+      formPoema.reset();
+      busqueda.value = "";
+      mostrarPoemas();
+      formulario.close();
+
+      document.getElementById("poemas").scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+
+    mostrarPoemas();
+  </script>
+
+</body>
+</html>
