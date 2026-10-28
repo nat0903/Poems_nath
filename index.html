@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Versos en la Oscuridad</title>
+  <meta name="theme-color" content="#100d10">
+  <title>Versos en la Oscuridad | Poems_nath</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -36,6 +37,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 20px;
       border-bottom: 1px solid var(--borde);
     }
 
@@ -44,21 +46,44 @@
       font-size: 27px;
       color: #e7bdc6;
       letter-spacing: 2px;
+      text-decoration: none;
     }
 
     .logo span {
       color: var(--rojo);
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     nav a {
       color: var(--suave);
       text-decoration: none;
-      margin-left: 24px;
       font-size: 13px;
     }
 
     nav a:hover {
       color: #fff;
+    }
+
+    .nav-publicar {
+      border: 1px solid var(--borde);
+      padding: 10px 14px;
+      border-radius: 3px;
+    }
+
+    .nav-cuenta {
+      background: var(--rojo);
+      color: white !important;
+      padding: 11px 16px;
+      border-radius: 3px;
+    }
+
+    .nav-cuenta:hover {
+      background: #c15368;
     }
 
     .hero {
@@ -145,7 +170,9 @@
       width: min(100%, 260px);
     }
 
-    #busqueda:focus, textarea:focus, input:focus {
+    #busqueda:focus,
+    textarea:focus,
+    input:focus {
       border-color: var(--rojo);
     }
 
@@ -251,7 +278,9 @@
       margin-bottom: 8px;
     }
 
-    .campo input, .campo textarea, .campo select {
+    .campo input,
+    .campo textarea,
+    .campo select {
       width: 100%;
       background: var(--fondo);
       color: white;
@@ -307,8 +336,8 @@
         padding: 20px;
       }
 
-      nav a {
-        margin-left: 10px;
+      nav {
+        gap: 8px;
       }
     }
 
@@ -328,20 +357,23 @@
       nav a {
         font-size: 11px;
       }
+
+      .nav-publicar,
+      .nav-cuenta {
+        padding: 9px 10px;
+      }
     }
   </style>
 </head>
 
 <body>
-
   <header>
-    <a class="logo" href="#" style="text-decoration:none">
-      versos<span>.</span>
-    </a>
+    <a class="logo" href="index.html">versos<span>.</span></a>
 
-    <nav>
+    <nav aria-label="Navegación principal">
       <a href="#poemas">Poemas</a>
-      <a href="#publicar" id="enlacePublicar">Publicar</a>
+      <a href="#publicar" id="enlacePublicar" class="nav-publicar">Publicar</a>
+      <a href="cuenta.html" class="nav-cuenta">Mi cuenta ↗</a>
     </nav>
   </header>
 
@@ -355,7 +387,7 @@
       las historias que no contamos y las palabras que merecen existir.
     </p>
 
-    <button class="principal" id="abrirFormulario">
+    <button class="principal" id="abrirFormulario" type="button">
       + Escribe tu poema
     </button>
   </section>
@@ -378,21 +410,28 @@
     "A veces, escribir es la única forma de decir la verdad."
   </footer>
 
-  <!-- Formulario para publicar -->
   <dialog id="formulario">
     <h2>Deja tus palabras aquí.</h2>
 
     <form id="formPoema">
       <div class="campo">
         <label for="titulo">Título del poema</label>
-        <input id="titulo" maxlength="100" required
-          placeholder="Ej. Lo que nunca te dije">
+        <input
+          id="titulo"
+          maxlength="100"
+          required
+          placeholder="Ej. Lo que nunca te dije"
+        >
       </div>
 
       <div class="campo">
         <label for="autor">Nombre o seudónimo</label>
-        <input id="autor" maxlength="60" required
-          placeholder="Ej. Anónimo">
+        <input
+          id="autor"
+          maxlength="60"
+          required
+          placeholder="Ej. Anónimo"
+        >
       </div>
 
       <div class="campo">
@@ -409,13 +448,18 @@
 
       <div class="campo">
         <label for="contenido">Tu poema</label>
-        <textarea id="contenido" maxlength="10000" required
-          placeholder="Escribe desde el corazón..."></textarea>
+        <textarea
+          id="contenido"
+          maxlength="10000"
+          required
+          placeholder="Escribe desde el corazón..."
+        ></textarea>
       </div>
 
       <div class="acciones">
-        <button type="button" class="secundario"
-          id="cancelar">Cancelar</button>
+        <button type="button" class="secundario" id="cancelar">
+          Cancelar
+        </button>
         <button type="submit" class="principal">
           Publicar poema
         </button>
@@ -423,7 +467,6 @@
     </form>
   </dialog>
 
-  <!-- Ventana para leer un poema completo -->
   <dialog id="ventanaLectura">
     <span class="etiqueta" id="lecturaCategoria"></span>
     <h2 id="lecturaTitulo"></h2>
@@ -431,9 +474,7 @@
     <div id="lectura"></div>
 
     <div class="acciones">
-      <button class="secundario" id="cerrarLectura">
-        Cerrar
-      </button>
+      <button class="secundario" id="cerrarLectura">Cerrar</button>
     </div>
   </dialog>
 
@@ -444,7 +485,6 @@
     const listaPoemas = document.getElementById("listaPoemas");
     const busqueda = document.getElementById("busqueda");
 
-    // Poemas de ejemplo
     const ejemplos = [
       {
         id: "ejemplo-1",
@@ -469,7 +509,6 @@
       }
     ];
 
-    // Cada navegador mantiene sus propios poemas.
     let poemas = cargarPoemas();
 
     function cargarPoemas() {
@@ -493,8 +532,15 @@
 
     function crearElemento(tag, clase, texto) {
       const elemento = document.createElement(tag);
-      if (clase) elemento.className = clase;
-      if (texto !== undefined) elemento.textContent = texto;
+
+      if (clase) {
+        elemento.className = clase;
+      }
+
+      if (texto !== undefined) {
+        elemento.textContent = texto;
+      }
+
       return elemento;
     }
 
@@ -505,19 +551,25 @@
 
       const encontrados = poemas.filter(poema =>
         [poema.titulo, poema.autor, poema.categoria, poema.contenido]
-          .some(valor => valor.toLocaleLowerCase("es").includes(consulta))
+          .some(valor =>
+            String(valor).toLocaleLowerCase("es").includes(consulta)
+          )
       );
 
-      if (encontrados.length === 0) {
+      if (!encontrados.length) {
         listaPoemas.append(
-          crearElemento("p", "vacio",
-            "No encontramos poemas.\nQuizás sea hora de escribir el primero.")
+          crearElemento(
+            "p",
+            "vacio",
+            "No encontramos poemas.\nQuizás sea hora de escribir el primero."
+          )
         );
         return;
       }
 
       encontrados.forEach(poema => {
         const tarjeta = crearElemento("article", "poema");
+
         tarjeta.tabIndex = 0;
         tarjeta.setAttribute("role", "button");
         tarjeta.setAttribute("aria-label", "Leer " + poema.titulo);
@@ -525,10 +577,13 @@
         tarjeta.append(
           crearElemento("span", "categoria", poema.categoria),
           crearElemento("h3", "", poema.titulo),
-          crearElemento("p", "fragmento",
+          crearElemento(
+            "p",
+            "fragmento",
             poema.contenido.length > 150
               ? poema.contenido.slice(0, 150) + "…"
-              : poema.contenido),
+              : poema.contenido
+          ),
           crearElemento("span", "autor", "Por " + poema.autor)
         );
 
@@ -546,14 +601,11 @@
     }
 
     function leerPoema(poema) {
-      document.getElementById("lecturaCategoria").textContent =
-        poema.categoria;
-      document.getElementById("lecturaTitulo").textContent =
-        poema.titulo;
+      document.getElementById("lecturaCategoria").textContent = poema.categoria;
+      document.getElementById("lecturaTitulo").textContent = poema.titulo;
       document.getElementById("lecturaAutor").textContent =
         "Escrito por " + poema.autor;
-      document.getElementById("lectura").textContent =
-        poema.contenido;
+      document.getElementById("lectura").textContent = poema.contenido;
 
       ventanaLectura.showModal();
     }
@@ -562,19 +614,23 @@
       formulario.showModal();
     }
 
-    document.getElementById("abrirFormulario")
+    document
+      .getElementById("abrirFormulario")
       .addEventListener("click", abrirFormulario);
 
-    document.getElementById("enlacePublicar")
+    document
+      .getElementById("enlacePublicar")
       .addEventListener("click", evento => {
         evento.preventDefault();
         abrirFormulario();
       });
 
-    document.getElementById("cancelar")
+    document
+      .getElementById("cancelar")
       .addEventListener("click", () => formulario.close());
 
-    document.getElementById("cerrarLectura")
+    document
+      .getElementById("cerrarLectura")
       .addEventListener("click", () => ventanaLectura.close());
 
     busqueda.addEventListener("input", () => {
@@ -585,16 +641,20 @@
       evento.preventDefault();
 
       const nuevoPoema = {
-        id: crypto.randomUUID(),
+        id: crypto.randomUUID
+          ? crypto.randomUUID()
+          : String(Date.now()),
         titulo: document.getElementById("titulo").value.trim(),
         autor: document.getElementById("autor").value.trim(),
         categoria: document.getElementById("categoria").value,
         contenido: document.getElementById("contenido").value.trim()
       };
 
-      if (!nuevoPoema.titulo ||
-          !nuevoPoema.autor ||
-          !nuevoPoema.contenido) {
+      if (
+        !nuevoPoema.titulo ||
+        !nuevoPoema.autor ||
+        !nuevoPoema.contenido
+      ) {
         return;
       }
 
@@ -617,310 +677,24 @@
 
     mostrarPoemas();
   </script>
-  
-<!-- Conexión de Poems_nath con Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  const SUPABASE_URL = 'https://bxgcdqfcrjmyokuesiah.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1wS';
+  <!-- Conexión preparada para las funciones de cuenta -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-window.supabaseClientReady = supabaseClient;
-  console.log('Poems_nath: conexión preparada con Supabase');
-</script>
-<!-- FORMULARIO DE CUENTA: POEMS_NATH -->
-<style>
-  #pn-auth {
-    max-width: 390px;
-    margin: 40px auto;
-    padding: 25px;
-    background: #111;
-    border: 1px solid #7f1d1d;
-    border-radius: 14px;
-    color: #f5f5f5;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-  }
+  <script>
+    const SUPABASE_URL =
+      "https://bxgcdqfcrjmyokuesiah.supabase.co";
 
-  #pn-auth * { box-sizing: border-box; }
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1w";
 
-  #pn-auth h2 {
-    text-align: center;
-    color: #ef4444;
-    margin-top: 0;
-  }
+    window.supabaseClientReady = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
 
-  #pn-auth p {
-    text-align: center;
-    color: #bbb;
-  }
-
-  #pn-auth label {
-    display: block;
-    margin: 14px 0 6px;
-  }
-
-  #pn-auth input {
-    width: 100%;
-    padding: 12px;
-    background: #202020;
-    color: white;
-    border: 1px solid #444;
-    border-radius: 7px;
-  }
-
-  #pn-auth button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border: 0;
-    border-radius: 7px;
-    background: #b91c1c;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  #pn-auth button:hover { background: #dc2626; }
-
-  #pn-auth .pn-secondary {
-    background: #292929;
-    border: 1px solid #555;
-  }
-
-  #pn-auth-status {
-    overflow-wrap: anywhere;
-    font-size: 14px;
-  }
-</style>
-
-<div id="pn-profile" hidden>
-  <hr>
-  <h3>Mi perfil</h3>
-  <p>Correo: <span id="pn-profile-email"></span></p>
-  <p>Usuario: <span id="pn-profile-name"></span></p>
-  <p id="pn-profile-bio"></p>
-  <p>¡Bienvenido/a a Poems_nath!</p>
-</div>
-
-
-<div class="acceso-cuenta">
-  <p>¿Quieres compartir tus propios poemas?</p>
-  <a href="cuenta.html" class="boton-cuenta">
-    Mi cuenta ↗
-  </a>
-</div>
-
-<style>
-  .acceso-cuenta {
-    margin: 40px auto;
-    padding: 24px;
-    max-width: 420px;
-    text-align: center;
-    border: 1px solid #48232f;
-    border-radius: 14px;
-    background: #1b1015;
-    color: #f6e9ed;
-  }
-
-  .boton-cuenta {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    background: #8d263e;
-    color: white;
-    text-decoration: none;
-  }
-
-  .boton-cuenta:hover {
-    background: #c64b65;
-  }
-</style>
-  
-<script>
-(() => {
-  const client = window.supabaseClientReady;
-
-  const form = document.getElementById('pn-auth-form');
-  const emailInput = document.getElementById('pn-auth-email');
-  const passwordInput = document.getElementById('pn-auth-password');
-  const submitButton = document.getElementById('pn-auth-submit');
-  const toggleButton = document.getElementById('pn-auth-toggle');
-  const logoutButton = document.getElementById('pn-auth-logout');
-  const subtitle = document.getElementById('pn-auth-subtitle');
-  const status = document.getElementById('pn-auth-status');
-
-  const profile = document.getElementById('pn-profile');
-  const profileEmail = document.getElementById('pn-profile-email');
-  const profileName = document.getElementById('pn-profile-name');
-  const profileBio = document.getElementById('pn-profile-bio');
-
-  let mode = 'login';
-
-  function message(text) {
-    status.textContent = text;
-  }
-
-  function updateMode() {
-    const registering = mode === 'signup';
-
-    subtitle.textContent = registering
-      ? 'Crea tu cuenta para comenzar a publicar.'
-      : 'Inicia sesión para entrar a tu cuenta.';
-
-    submitButton.textContent = registering
-      ? 'Crear cuenta'
-      : 'Iniciar sesión';
-
-    toggleButton.textContent = registering
-      ? 'Ya tengo una cuenta'
-      : 'Crear una cuenta nueva';
-
-    passwordInput.autocomplete = registering
-      ? 'new-password'
-      : 'current-password';
-
-    message('');
-  }
-
-  async function showProfile(user) {
-    if (!user) {
-      profile.hidden = true;
-      form.hidden = false;
-      emailInput.hidden = false;
-      passwordInput.hidden = false;
-      submitButton.hidden = false;
-      toggleButton.hidden = false;
-      logoutButton.hidden = true;
-      mode = 'login';
-      updateMode();
-      return;
-    }
-
-    form.hidden = true;
-    emailInput.hidden = true;
-    passwordInput.hidden = true;
-    submitButton.hidden = true;
-    toggleButton.hidden = true;
-    logoutButton.hidden = false;
-    profile.hidden = false;
-
-    profileEmail.textContent = user.email || '';
-
-    profileName.textContent =
-      user.user_metadata?.username ||
-      user.email?.split('@')[0] ||
-      'Usuario';
-
-    profileBio.textContent = '';
-
-    const { data, error } = await client
-      .from('profiles')
-      .select('username, bio')
-      .eq('id', user.id)
-      .maybeSingle();
-
-    if (error) {
-      message('Sesión iniciada, pero no se pudo cargar el perfil.');
-      console.error(error);
-      return;
-    }
-
-    if (data) {
-      profileName.textContent =
-        data.username || profileName.textContent;
-
-      profileBio.textContent = data.bio || '';
-    }
-
-    subtitle.textContent = 'Tu cuenta está activa.';
-    message('¡Bienvenido/a a Poems_nath!');
-  }
-
-  toggleButton.addEventListener('click', () => {
-    mode = mode === 'login' ? 'signup' : 'login';
-    updateMode();
-  });
-
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    submitButton.disabled = true;
-    message('Procesando...');
-
-    try {
-      let result;
-
-      if (mode === 'signup') {
-        result = await client.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo:
-              'https://nat0903.github.io/Poems_nath/'
-          }
-        });
-      } else {
-        result = await client.auth.signInWithPassword({
-          email,
-          password
-        });
-      }
-
-      if (result.error) throw result.error;
-
-      if (mode === 'signup' && !result.data.session) {
-        message(
-          'Revisa tu correo y confirma tu cuenta antes de iniciar sesión.'
-        );
-      } else if (result.data.user) {
-        await showProfile(result.data.user);
-      }
-    } catch (error) {
-      message('No se pudo completar la operación: ' + error.message);
-    } finally {
-      submitButton.disabled = false;
-    }
-  });
-
-  logoutButton.addEventListener('click', async () => {
-    logoutButton.disabled = true;
-
-    try {
-      const { error } = await client.auth.signOut();
-
-      if (error) throw error;
-
-      await showProfile(null);
-      message('Has cerrado sesión.');
-    } catch (error) {
-      message('No se pudo cerrar sesión: ' + error.message);
-    } finally {
-      logoutButton.disabled = false;
-    }
-  });
-
-  client.auth.getSession().then(async ({ data, error }) => {
-    if (error) {
-      message('No se pudo comprobar la sesión.');
-      return;
-    }
-
-    await showProfile(data.session?.user || null);
-  });
-
-  client.auth.onAuthStateChange((_event, session) => {
-    showProfile(session?.user || null);
-  });
-})();
-</script>
+    console.log("Poems_nath: conexión preparada con Supabase");
+  </script>
 </body>
 </html>
+
