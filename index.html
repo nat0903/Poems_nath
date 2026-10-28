@@ -707,44 +707,41 @@ window.supabaseClientReady = supabaseClient;
   <p>¡Bienvenido/a a Poems_nath!</p>
 </div>
 
-<section id="pn-auth">
-  <h2>Poems_nath</h2>
-  <p id="pn-auth-subtitle">Inicia sesión para entrar a tu cuenta.</p>
 
-  <form id="pn-auth-form">
-    <label for="pn-auth-email">Correo electrónico</label>
-    <input
-      id="pn-auth-email"
-      type="email"
-      autocomplete="email"
-      required
-      placeholder="tu@correo.com"
-    >
+<div class="acceso-cuenta">
+  <p>¿Quieres compartir tus propios poemas?</p>
+  <a href="cuenta.html" class="boton-cuenta">
+    Mi cuenta ↗
+  </a>
+</div>
 
-    <label for="pn-auth-password">Contraseña</label>
-    <input
-      id="pn-auth-password"
-      type="password"
-      autocomplete="current-password"
-      minlength="6"
-      required
-      placeholder="Mínimo 6 caracteres"
-    >
+<style>
+  .acceso-cuenta {
+    margin: 40px auto;
+    padding: 24px;
+    max-width: 420px;
+    text-align: center;
+    border: 1px solid #48232f;
+    border-radius: 14px;
+    background: #1b1015;
+    color: #f6e9ed;
+  }
 
-    <button id="pn-auth-submit" type="submit">Iniciar sesión</button>
-  </form>
+  .boton-cuenta {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: #8d263e;
+    color: white;
+    text-decoration: none;
+  }
 
-  <button id="pn-auth-toggle" class="pn-secondary" type="button">
-    Crear una cuenta nueva
-  </button>
-
-  <button id="pn-auth-logout" class="pn-secondary" type="button" hidden>
-    Cerrar sesión
-  </button>
-
-  <p id="pn-auth-status" role="status" aria-live="polite"></p>
-</section>
-
+  .boton-cuenta:hover {
+    background: #c64b65;
+  }
+</style>
+  
 <script>
 (() => {
   const client = window.supabaseClientReady;
