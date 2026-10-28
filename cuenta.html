@@ -1,198 +1,196 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10090c">
-  <title>Acceso | Poems_nath</title>
+  <title>Mi cuenta | Poems_nath</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --fondo: #10090c;
-      --panel: #1b1015;
-      --rojo: #8d263e;
-      --rojo-claro: #c64b65;
-      --texto: #f6e9ed;
-      --suave: #bba8ae;
-      --borde: #48232f;
-    }
-
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
+      background: #100d10;
+      color: #eee5e7;
+      font-family: "DM Sans", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 24px;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(ellipse at top, #35131f 0%, transparent 55%),
-        var(--fondo);
-      color: var(--texto);
-      font-family: Georgia, "Times New Roman", serif;
     }
 
-    .contenedor {
+    .caja {
       width: 100%;
-      max-width: 440px;
-    }
-
-    .volver {
-      display: inline-block;
-      margin-bottom: 22px;
-      color: var(--suave);
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .volver:hover {
-      color: white;
-    }
-
-    .tarjeta {
+      max-width: 430px;
       padding: 34px;
-      border: 1px solid var(--borde);
-      border-radius: 20px;
-      background: rgba(27, 16, 21, 0.96);
-      box-shadow: 0 20px 65px #0008;
+      background: #191318;
+      border: 1px solid #38252e;
     }
 
-    .marca {
+    .logo {
+      display: block;
       text-align: center;
-      margin-bottom: 30px;
+      color: #e7bdc6;
+      text-decoration: none;
+      font: 28px "Cormorant Garamond", serif;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
     }
 
-    .simbolo {
-      color: var(--rojo-claro);
-      font-size: 36px;
+    .logo span {
+      color: #a83d50;
+    }
+
+    .etiqueta {
+      color: #d77d91;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
     }
 
     h1 {
-      margin: 8px 0;
-      font-size: 32px;
-      letter-spacing: 1px;
-    }
-
-    .marca p,
-    .descripcion {
-      color: var(--suave);
-      line-height: 1.6;
-    }
-
-    .marca p {
-      margin: 0;
-      font-style: italic;
-    }
-
-    h2 {
-      margin: 0 0 8px;
-      font-size: 23px;
+      font: 40px "Cormorant Garamond", serif;
+      font-weight: 400;
+      margin: 12px 0;
     }
 
     .descripcion {
-      margin: 0 0 24px;
-      font-size: 14px;
+      color: #a99ba2;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .pestanas {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .pestanas button {
+      flex: 1;
+      padding: 12px 8px;
+      background: transparent;
+      color: #a99ba2;
+      border: 1px solid #38252e;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .pestanas button.activa {
+      color: white;
+      background: #552431;
+      border-color: #a83d50;
+    }
+
+    .campo {
+      margin-bottom: 18px;
     }
 
     label {
       display: block;
-      margin: 17px 0 8px;
-      font-size: 14px;
+      color: #d9a4b0;
+      font-size: 12px;
+      margin-bottom: 8px;
     }
 
     input {
       width: 100%;
-      padding: 13px 14px;
-      color: var(--texto);
-      background: #10090c;
-      border: 1px solid var(--borde);
-      border-radius: 9px;
-      font: inherit;
+      padding: 13px;
+      background: #100d10;
+      color: white;
+      border: 1px solid #38252e;
       outline: none;
+      font: inherit;
+      border-radius: 2px;
     }
 
     input:focus {
-      border-color: var(--rojo-claro);
-      box-shadow: 0 0 0 3px #c64b6522;
+      border-color: #a83d50;
     }
 
-    button {
+    .principal {
       width: 100%;
-      padding: 13px;
-      margin-top: 20px;
-      border: 0;
-      border-radius: 9px;
-      background: var(--rojo);
+      margin-top: 5px;
+      padding: 14px;
       color: white;
+      background: #a83d50;
+      border: 1px solid #a83d50;
       font: inherit;
-      font-weight: bold;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
-    button:hover {
-      background: var(--rojo-claro);
+    .principal:hover {
+      background: #c15368;
     }
 
-    button:disabled {
+    .principal:disabled {
       opacity: 0.6;
       cursor: wait;
     }
 
-    .secundario {
-      margin-top: 10px;
-      background: transparent;
-      border: 1px solid var(--borde);
-      color: var(--texto);
-    }
-
-    .secundario:hover {
-      background: #35131f;
-    }
-
     .enlace {
       display: block;
-      margin-top: 17px;
+      margin-top: 20px;
       text-align: center;
-      color: #e5a4b3;
+      color: #d9a4b0;
       background: none;
       border: none;
-      padding: 5px;
-      font-size: 13px;
-      font-weight: normal;
-      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      width: 100%;
     }
 
-    .enlace:hover {
-      background: transparent;
-      color: white;
-    }
-
-    #mensaje {
-      min-height: 24px;
-      margin: 16px 0 0;
-      font-size: 13px;
-      line-height: 1.5;
+    .mensaje {
+      display: none;
+      padding: 12px;
+      margin-bottom: 18px;
+      font-size: 12px;
+      line-height: 1.6;
       overflow-wrap: anywhere;
     }
 
-    .nota {
-      margin-top: 20px;
-      color: #8f7d83;
-      font-size: 12px;
-      line-height: 1.6;
-      text-align: center;
+    .mensaje.visible {
+      display: block;
     }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 16px;
-      }
+    .mensaje.error {
+      background: #35171f;
+      color: #ffc4ce;
+      border: 1px solid #703142;
+    }
 
-      .tarjeta {
+    .mensaje.exito {
+      background: #18271e;
+      color: #c3f0d0;
+      border: 1px solid #315840;
+    }
+
+    .volver {
+      display: block;
+      margin-top: 28px;
+      text-align: center;
+      color: #a99ba2;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .volver:hover,
+    .enlace:hover {
+      color: white;
+    }
+
+    @media (max-width: 420px) {
+      .caja {
         padding: 25px 20px;
       }
     }
@@ -200,220 +198,268 @@
 </head>
 
 <body>
-  <main class="contenedor">
-    <a class="volver" href="index.html">← Volver a los poemas</a>
+  <main class="caja">
+    <a class="logo" href="index.html">versos<span>.</span></a>
 
-    <section class="tarjeta">
-      <header class="marca">
-        <div class="simbolo" aria-hidden="true">✦</div>
-        <h1>Poems_nath</h1>
-        <p>Donde las palabras encuentran refugio.</p>
-      </header>
+    <span class="etiqueta">Poems_nath · Tu espacio</span>
+    <h1 id="titulo">Bienvenida de nuevo.</h1>
 
-      <h2 id="titulo">Iniciar sesión</h2>
-      <p class="descripcion" id="descripcion">
-        Vuelve a tu espacio de escritura.
-      </p>
+    <p class="descripcion" id="descripcion">
+      Inicia sesión para entrar a tu rincón de palabras.
+    </p>
 
-      <form id="formulario">
+    <div class="pestanas">
+      <button type="button" id="botonLogin" class="activa">
+        Iniciar sesión
+      </button>
+
+      <button type="button" id="botonRegistro">
+        Crear cuenta
+      </button>
+    </div>
+
+    <div id="mensaje" class="mensaje" role="status" aria-live="polite"></div>
+
+    <form id="formCuenta">
+      <div class="campo" id="campoUsuario" hidden>
+        <label for="usuario">Nombre de usuario</label>
+        <input
+          type="text"
+          id="usuario"
+          maxlength="30"
+          autocomplete="username"
+          placeholder="Ej. poeta_nocturna"
+        >
+      </div>
+
+      <div class="campo">
         <label for="correo">Correo electrónico</label>
         <input
-          id="correo"
           type="email"
-          autocomplete="email"
-          placeholder="tu@correo.com"
+          id="correo"
           required
+          autocomplete="email"
+          placeholder="tucorreo@ejemplo.com"
         >
+      </div>
 
+      <div class="campo">
         <label for="contrasena">Contraseña</label>
         <input
-          id="contrasena"
           type="password"
-          autocomplete="current-password"
-          minlength="6"
-          placeholder="Mínimo 6 caracteres"
+          id="contrasena"
           required
+          minlength="6"
+          autocomplete="current-password"
+          placeholder="Mínimo 6 caracteres"
         >
+      </div>
 
-        <button id="enviar" type="submit">
-          Iniciar sesión
-        </button>
-      </form>
-
-      <button id="cambiar" class="secundario" type="button">
-        Crear una cuenta nueva
+      <button class="principal" id="enviar" type="submit">
+        Iniciar sesión
       </button>
+    </form>
 
-      <button id="recuperar" class="enlace" type="button">
-        ¿Olvidaste tu contraseña?
-      </button>
+    <button class="enlace" id="recuperar" type="button">
+      ¿Olvidaste tu contraseña?
+    </button>
 
-      <p id="mensaje" role="status" aria-live="polite"></p>
-
-      <p class="nota">
-        Tus palabras, tu espacio, tu historia.<br>
-        Poems_nath ©
-      </p>
-    </section>
+    <a class="volver" href="index.html">
+      ← Volver a los poemas
+    </a>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
     const SUPABASE_URL =
-      'https://bxgcdqfcrjmyokuesiah.supabase.co';
+      "https://bxgcdqfcrjmyokuesiah.supabase.co";
 
-    const SUPABASE_PUBLISHABLE_KEY =
-      'sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1w';
+    const SUPABASE_KEY =
+      "sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1w";
 
     const supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
+      SUPABASE_KEY
     );
 
-    const formulario = document.getElementById('formulario');
-    const correo = document.getElementById('correo');
-    const contrasena = document.getElementById('contrasena');
-    const enviar = document.getElementById('enviar');
-    const cambiar = document.getElementById('cambiar');
-    const recuperar = document.getElementById('recuperar');
-    const titulo = document.getElementById('titulo');
-    const descripcion = document.getElementById('descripcion');
-    const mensaje = document.getElementById('mensaje');
+    const form = document.getElementById("formCuenta");
+    const botonLogin = document.getElementById("botonLogin");
+    const botonRegistro = document.getElementById("botonRegistro");
+    const campoUsuario = document.getElementById("campoUsuario");
+    const usuario = document.getElementById("usuario");
+    const correo = document.getElementById("correo");
+    const contrasena = document.getElementById("contrasena");
+    const enviar = document.getElementById("enviar");
+    const recuperar = document.getElementById("recuperar");
+    const mensaje = document.getElementById("mensaje");
 
-    let modo = 'login';
+    let modo = "login";
 
-    function informar(texto) {
+    function mostrarMensaje(texto, tipo) {
       mensaje.textContent = texto;
+      mensaje.className = "mensaje visible " + tipo;
     }
 
-    function cambiarModo() {
-      const registro = modo === 'signup';
-
-      titulo.textContent = registro
-        ? 'Crear una cuenta'
-        : 'Iniciar sesión';
-
-      descripcion.textContent = registro
-        ? 'Abre tu propio espacio para compartir tus escritos.'
-        : 'Vuelve a tu espacio de escritura.';
-
-      enviar.textContent = registro
-        ? 'Registrarme'
-        : 'Iniciar sesión';
-
-      cambiar.textContent = registro
-        ? 'Ya tengo una cuenta'
-        : 'Crear una cuenta nueva';
-
-      contrasena.autocomplete = registro
-        ? 'new-password'
-        : 'current-password';
-
-      informar('');
+    function limpiarMensaje() {
+      mensaje.textContent = "";
+      mensaje.className = "mensaje";
     }
 
-    cambiar.addEventListener('click', () => {
-      modo = modo === 'login' ? 'signup' : 'login';
-      cambiarModo();
-    });
+    function cambiarModo(nuevoModo) {
+      modo = nuevoModo;
+      limpiarMensaje();
 
-    formulario.addEventListener('submit', async (evento) => {
+      const registro = modo === "registro";
+
+      botonLogin.classList.toggle("activa", !registro);
+      botonRegistro.classList.toggle("activa", registro);
+      campoUsuario.hidden = !registro;
+      usuario.required = registro;
+
+      document.getElementById("titulo").textContent =
+        registro ? "Crea tu espacio." : "Bienvenida de nuevo.";
+
+      document.getElementById("descripcion").textContent =
+        registro
+          ? "Crea una cuenta para empezar tu propio camino entre versos."
+          : "Inicia sesión para entrar a tu rincón de palabras.";
+
+      enviar.textContent =
+        registro ? "Crear cuenta" : "Iniciar sesión";
+
+      contrasena.autocomplete =
+        registro ? "new-password" : "current-password";
+
+      recuperar.style.display = registro ? "none" : "block";
+    }
+
+    botonLogin.addEventListener("click", () => cambiarModo("login"));
+    botonRegistro.addEventListener("click", () => cambiarModo("registro"));
+
+    form.addEventListener("submit", async (evento) => {
       evento.preventDefault();
+      limpiarMensaje();
 
       const email = correo.value.trim();
       const password = contrasena.value;
+      const nombre = usuario.value.trim();
 
       enviar.disabled = true;
-      cambiar.disabled = true;
-      recuperar.disabled = true;
-      informar('Procesando...');
+      enviar.textContent = "Un momento...";
 
       try {
-        let resultado;
+        if (modo === "registro") {
+          if (nombre.length < 3) {
+            mostrarMensaje(
+              "Tu nombre de usuario debe tener al menos 3 caracteres.",
+              "error"
+            );
+            return;
+          }
 
-        if (modo === 'signup') {
-          resultado = await supabaseClient.auth.signUp({
+          const { data, error } = await supabaseClient.auth.signUp({
             email,
             password,
             options: {
-              emailRedirectTo:
-                'https://nat0903.github.io/Poems_nath/'
+              emailRedirectTo: window.location.origin +
+                window.location.pathname.replace(/[^/]*$/, "cuenta.html"),
+              data: {
+                username: nombre
+              }
             }
           });
+
+          if (error) throw error;
+
+          if (data.session) {
+            window.location.href = "perfil.html";
+            return;
+          }
+
+          mostrarMensaje(
+            "¡Cuenta creada! Revisa tu correo y confirma tu dirección antes de iniciar sesión. Si no aparece, revisa la carpeta de spam.",
+            "exito"
+          );
         } else {
-          resultado = await supabaseClient.auth.signInWithPassword({
+          const { error } = await supabaseClient.auth.signInWithPassword({
             email,
             password
           });
-        }
 
-        if (resultado.error) {
-          throw resultado.error;
-        }
+          if (error) throw error;
 
-        if (modo === 'signup' && !resultado.data.session) {
-          informar(
-            'Revisa tu correo y confirma la cuenta antes de iniciar sesión.'
-          );
+          window.location.href = "perfil.html";
           return;
         }
-
-        if (resultado.data.session) {
-          informar('¡Acceso correcto! Abriendo tu perfil...');
-
-          window.location.href = 'perfil.html';
-        }
       } catch (error) {
-        console.error(error);
-        informar('No se pudo completar la operación: ' + error.message);
+        mostrarMensaje(
+          error.message || "Ocurrió un error. Inténtalo de nuevo.",
+          "error"
+        );
       } finally {
         enviar.disabled = false;
-        cambiar.disabled = false;
-        recuperar.disabled = false;
+        enviar.textContent =
+          modo === "registro" ? "Crear cuenta" : "Iniciar sesión";
       }
     });
 
-    recuperar.addEventListener('click', async () => {
+    recuperar.addEventListener("click", async () => {
+      limpiarMensaje();
+
       const email = correo.value.trim();
 
       if (!email) {
-        informar('Escribe tu correo arriba para recibir el enlace de recuperación.');
+        mostrarMensaje(
+          "Escribe tu correo electrónico primero.",
+          "error"
+        );
         correo.focus();
         return;
       }
 
       recuperar.disabled = true;
-      informar('Enviando solicitud...');
 
       try {
         const { error } =
           await supabaseClient.auth.resetPasswordForEmail(email, {
-            redirectTo: 'https://nat0903.github.io/Poems_nath/cuenta.html'
+            redirectTo: window.location.origin +
+              window.location.pathname.replace(/[^/]*$/, "cuenta.html")
           });
 
         if (error) throw error;
 
-        informar(
-          'Si la cuenta existe, recibirás instrucciones en tu correo. Revisa también spam.'
+        mostrarMensaje(
+          "Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.",
+          "exito"
         );
       } catch (error) {
-        informar('No se pudo enviar el enlace: ' + error.message);
+        mostrarMensaje(error.message, "error");
       } finally {
         recuperar.disabled = false;
       }
     });
 
-    supabaseClient.auth.getSession().then(({ data, error }) => {
-      if (error) {
-        informar('No se pudo comprobar la sesión.');
-        return;
-      }
+    async function revisarSesion() {
+      const { data } = await supabaseClient.auth.getSession();
 
       if (data.session) {
-        window.location.href = 'perfil.html';
+        window.location.replace("perfil.html");
       }
-    });
+    }
+
+    cambiarModo("login");
+    revisarSesion();
+
+    const parametros = new URLSearchParams(window.location.search);
+
+    if (parametros.get("confirmado") === "1") {
+      mostrarMensaje(
+        "Correo confirmado. Ahora puedes iniciar sesión.",
+        "exito"
+      );
+    }
   </script>
 </body>
 </html>
+
