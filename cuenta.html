@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10090c">
+  <title>Acceso | Poems_nath</title>
+
+  <style>
+    :root {
+      --fondo: #10090c;
+      --panel: #1b1015;
+      --rojo: #8d263e;
+      --rojo-claro: #c64b65;
+      --texto: #f6e9ed;
+      --suave: #bba8ae;
+      --borde: #48232f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(ellipse at top, #35131f 0%, transparent 55%),
+        var(--fondo);
+      color: var(--texto);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .volver {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: var(--suave);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .volver:hover {
+      color: white;
+    }
+
+    .tarjeta {
+      padding: 34px;
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      background: rgba(27, 16, 21, 0.96);
+      box-shadow: 0 20px 65px #0008;
+    }
+
+    .marca {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .simbolo {
+      color: var(--rojo-claro);
+      font-size: 36px;
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: 32px;
+      letter-spacing: 1px;
+    }
+
+    .marca p,
+    .descripcion {
+      color: var(--suave);
+      line-height: 1.6;
+    }
+
+    .marca p {
+      margin: 0;
+      font-style: italic;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+
+    .descripcion {
+      margin: 0 0 24px;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 17px 0 8px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 14px;
+      color: var(--texto);
+      background: #10090c;
+      border: 1px solid var(--borde);
+      border-radius: 9px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--rojo-claro);
+      box-shadow: 0 0 0 3px #c64b6522;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 20px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--rojo);
+      color: white;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: var(--rojo-claro);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .secundario {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--texto);
+    }
+
+    .secundario:hover {
+      background: #35131f;
+    }
+
+    .enlace {
+      display: block;
+      margin-top: 17px;
+      text-align: center;
+      color: #e5a4b3;
+      background: none;
+      border: none;
+      padding: 5px;
+      font-size: 13px;
+      font-weight: normal;
+      text-decoration: underline;
+    }
+
+    .enlace:hover {
+      background: transparent;
+      color: white;
+    }
+
+    #mensaje {
+      min-height: 24px;
+      margin: 16px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .nota {
+      margin-top: 20px;
+      color: #8f7d83;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+      }
+
+      .tarjeta {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="contenedor">
+    <a class="volver" href="index.html">← Volver a los poemas</a>
+
+    <section class="tarjeta">
+      <header class="marca">
+        <div class="simbolo" aria-hidden="true">✦</div>
+        <h1>Poems_nath</h1>
+        <p>Donde las palabras encuentran refugio.</p>
+      </header>
+
+      <h2 id="titulo">Iniciar sesión</h2>
+      <p class="descripcion" id="descripcion">
+        Vuelve a tu espacio de escritura.
+      </p>
+
+      <form id="formulario">
+        <label for="correo">Correo electrónico</label>
+        <input
+          id="correo"
+          type="email"
+          autocomplete="email"
+          placeholder="tu@correo.com"
+          required
+        >
+
+        <label for="contrasena">Contraseña</label>
+        <input
+          id="contrasena"
+          type="password"
+          autocomplete="current-password"
+          minlength="6"
+          placeholder="Mínimo 6 caracteres"
+          required
+        >
+
+        <button id="enviar" type="submit">
+          Iniciar sesión
+        </button>
+      </form>
+
+      <button id="cambiar" class="secundario" type="button">
+        Crear una cuenta nueva
+      </button>
+
+      <button id="recuperar" class="enlace" type="button">
+        ¿Olvidaste tu contraseña?
+      </button>
+
+      <p id="mensaje" role="status" aria-live="polite"></p>
+
+      <p class="nota">
+        Tus palabras, tu espacio, tu historia.<br>
+        Poems_nath ©
+      </p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL =
+      'https://bxgcdqfcrjmyokuesiah.supabase.co';
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      'sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1w';
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const formulario = document.getElementById('formulario');
+    const correo = document.getElementById('correo');
+    const contrasena = document.getElementById('contrasena');
+    const enviar = document.getElementById('enviar');
+    const cambiar = document.getElementById('cambiar');
+    const recuperar = document.getElementById('recuperar');
+    const titulo = document.getElementById('titulo');
+    const descripcion = document.getElementById('descripcion');
+    const mensaje = document.getElementById('mensaje');
+
+    let modo = 'login';
+
+    function informar(texto) {
+      mensaje.textContent = texto;
+    }
+
+    function cambiarModo() {
+      const registro = modo === 'signup';
+
+      titulo.textContent = registro
+        ? 'Crear una cuenta'
+        : 'Iniciar sesión';
+
+      descripcion.textContent = registro
+        ? 'Abre tu propio espacio para compartir tus escritos.'
+        : 'Vuelve a tu espacio de escritura.';
+
+      enviar.textContent = registro
+        ? 'Registrarme'
+        : 'Iniciar sesión';
+
+      cambiar.textContent = registro
+        ? 'Ya tengo una cuenta'
+        : 'Crear una cuenta nueva';
+
+      contrasena.autocomplete = registro
+        ? 'new-password'
+        : 'current-password';
+
+      informar('');
+    }
+
+    cambiar.addEventListener('click', () => {
+      modo = modo === 'login' ? 'signup' : 'login';
+      cambiarModo();
+    });
+
+    formulario.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+
+      const email = correo.value.trim();
+      const password = contrasena.value;
+
+      enviar.disabled = true;
+      cambiar.disabled = true;
+      recuperar.disabled = true;
+      informar('Procesando...');
+
+      try {
+        let resultado;
+
+        if (modo === 'signup') {
+          resultado = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+              emailRedirectTo:
+                'https://nat0903.github.io/Poems_nath/'
+            }
+          });
+        } else {
+          resultado = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+          });
+        }
+
+        if (resultado.error) {
+          throw resultado.error;
+        }
+
+        if (modo === 'signup' && !resultado.data.session) {
+          informar(
+            'Revisa tu correo y confirma la cuenta antes de iniciar sesión.'
+          );
+          return;
+        }
+
+        if (resultado.data.session) {
+          informar('¡Acceso correcto! Abriendo tu perfil...');
+
+          window.location.href = 'perfil.html';
+        }
+      } catch (error) {
+        console.error(error);
+        informar('No se pudo completar la operación: ' + error.message);
+      } finally {
+        enviar.disabled = false;
+        cambiar.disabled = false;
+        recuperar.disabled = false;
+      }
+    });
+
+    recuperar.addEventListener('click', async () => {
+      const email = correo.value.trim();
+
+      if (!email) {
+        informar('Escribe tu correo arriba para recibir el enlace de recuperación.');
+        correo.focus();
+        return;
+      }
+
+      recuperar.disabled = true;
+      informar('Enviando solicitud...');
+
+      try {
+        const { error } =
+          await supabaseClient.auth.resetPasswordForEmail(email, {
+            redirectTo: 'https://nat0903.github.io/Poems_nath/cuenta.html'
+          });
+
+        if (error) throw error;
+
+        informar(
+          'Si la cuenta existe, recibirás instrucciones en tu correo. Revisa también spam.'
+        );
+      } catch (error) {
+        informar('No se pudo enviar el enlace: ' + error.message);
+      } finally {
+        recuperar.disabled = false;
+      }
+    });
+
+    supabaseClient.auth.getSession().then(({ data, error }) => {
+      if (error) {
+        informar('No se pudo comprobar la sesión.');
+        return;
+      }
+
+      if (data.session) {
+        window.location.href = 'perfil.html';
+      }
+    });
+  </script>
+</body>
+</html>
