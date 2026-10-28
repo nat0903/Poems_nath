@@ -698,6 +698,15 @@ window.supabaseClientReady = supabaseClient;
   }
 </style>
 
+<div id="pn-profile" hidden>
+  <hr>
+  <h3>Mi perfil</h3>
+  <p>Correo: <span id="pn-profile-email"></span></p>
+  <p>Usuario: <span id="pn-profile-name"></span></p>
+  <p id="pn-profile-bio"></p>
+  <p>¡Bienvenido/a a Poems_nath!</p>
+</div>
+
 <section id="pn-auth">
   <h2>Poems_nath</h2>
   <p id="pn-auth-subtitle">Inicia sesión para entrar a tu cuenta.</p>
@@ -738,6 +747,8 @@ window.supabaseClientReady = supabaseClient;
 
 <script>
 (() => {
+  const client = window.supabaseClientReady;
+
   const form = document.getElementById('pn-auth-form');
   const emailInput = document.getElementById('pn-auth-email');
   const passwordInput = document.getElementById('pn-auth-password');
@@ -747,27 +758,91 @@ window.supabaseClientReady = supabaseClient;
   const subtitle = document.getElementById('pn-auth-subtitle');
   const status = document.getElementById('pn-auth-status');
 
+  const profile = document.getElementById('pn-profile');
+  const profileEmail = document.getElementById('pn-profile-email');
+  const profileName = document.getElementById('pn-profile-name');
+  const profileBio = document.getElementById('pn-profile-bio');
+
   let mode = 'login';
 
-  function showMessage(message) {
-    status.textContent = message;
+  function message(text) {
+    status.textContent = text;
   }
 
   function updateMode() {
     const registering = mode === 'signup';
+
     subtitle.textContent = registering
       ? 'Crea tu cuenta para comenzar a publicar.'
       : 'Inicia sesión para entrar a tu cuenta.';
+
     submitButton.textContent = registering
       ? 'Crear cuenta'
       : 'Iniciar sesión';
+
     toggleButton.textContent = registering
       ? 'Ya tengo una cuenta'
       : 'Crear una cuenta nueva';
+
     passwordInput.autocomplete = registering
       ? 'new-password'
       : 'current-password';
-    showMessage('');
+
+    message('');
+  }
+
+  async function showProfile(user) {
+    if (!user) {
+      profile.hidden = true;
+      form.hidden = false;
+      emailInput.hidden = false;
+      passwordInput.hidden = false;
+      submitButton.hidden = false;
+      toggleButton.hidden = false;
+      logoutButton.hidden = true;
+      mode = 'login';
+      updateMode();
+      return;
+    }
+
+    form.hidden = true;
+    emailInput.hidden = true;
+    passwordInput.hidden = true;
+    submitButton.hidden = true;
+    toggleButton.hidden = true;
+    logoutButton.hidden = false;
+    profile.hidden = false;
+
+    profileEmail.textContent = user.email || '';
+
+    profileName.textContent =
+      user.user_metadata?.username ||
+      user.email?.split('@')[0] ||
+      'Usuario';
+
+    profileBio.textContent = '';
+
+    const { data, error } = await client
+      .from('profiles')
+      .select('username, bio')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (error) {
+      message('Sesión iniciada, pero no se pudo cargar el perfil.');
+      console.error(error);
+      return;
+    }
+
+    if (data) {
+      profileName.textContent =
+        data.username || profileName.textContent;
+
+      profileBio.textContent = data.bio || '';
+    }
+
+    subtitle.textContent = 'Tu cuenta está activa.';
+    message('¡Bienvenido/a a Poems_nath!');
   }
 
   toggleButton.addEventListener('click', () => {
@@ -778,30 +853,26 @@ window.supabaseClientReady = supabaseClient;
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    if (!window.supabaseClientReady) {
-      showMessage('No se ha detectado la conexión. Recarga la página e inténtalo de nuevo.');
-      return;
-    }
-
     const email = emailInput.value.trim();
     const password = passwordInput.value;
 
     submitButton.disabled = true;
-    showMessage('Procesando...');
+    message('Procesando...');
 
     try {
       let result;
 
       if (mode === 'signup') {
-        result = await window.supabaseClientReady.auth.signUp({
+        result = await client.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: 'https://nat0903.github.io/Poems_nath/'
+            emailRedirectTo:
+              'https://nat0903.github.io/Poems_nath/'
           }
         });
       } else {
-        result = await window.supabaseClientReady.auth.signInWithPassword({
+        result = await client.auth.signInWithPassword({
           email,
           password
         });
@@ -809,38 +880,48 @@ window.supabaseClientReady = supabaseClient;
 
       if (result.error) throw result.error;
 
-      if (mode === 'signup') {
-        showMessage(
-          result.data.session
-            ? '¡Cuenta creada! Ya puedes comenzar.'
-            : '¡Registro enviado! Revisa tu correo para confirmar tu cuenta antes de iniciar sesión.'
+      if (mode === 'signup' && !result.data.session) {
+        message(
+          'Revisa tu correo y confirma tu cuenta antes de iniciar sesión.'
         );
-      } else {
-        showMessage('¡Sesión iniciada correctamente!');
-        subtitle.textContent = 'Ya has iniciado sesión en Poems_nath.';
-        logoutButton.hidden = false;
-        toggleButton.hidden = true;
-        submitButton.hidden = true;
+      } else if (result.data.user) {
+        await showProfile(result.data.user);
       }
     } catch (error) {
-      showMessage('No se pudo completar la operación: ' + error.message);
+      message('No se pudo completar la operación: ' + error.message);
     } finally {
       submitButton.disabled = false;
     }
   });
 
   logoutButton.addEventListener('click', async () => {
-    const { error } = await window.supabaseClientReady.auth.signOut();
+    logoutButton.disabled = true;
+
+    try {
+      const { error } = await client.auth.signOut();
+
+      if (error) throw error;
+
+      await showProfile(null);
+      message('Has cerrado sesión.');
+    } catch (error) {
+      message('No se pudo cerrar sesión: ' + error.message);
+    } finally {
+      logoutButton.disabled = false;
+    }
+  });
+
+  client.auth.getSession().then(async ({ data, error }) => {
     if (error) {
-      showMessage('No se pudo cerrar sesión: ' + error.message);
+      message('No se pudo comprobar la sesión.');
       return;
     }
-    mode = 'login';
-    updateMode();
-    logoutButton.hidden = true;
-    toggleButton.hidden = false;
-    submitButton.hidden = false;
-    showMessage('Has cerrado sesión.');
+
+    await showProfile(data.session?.user || null);
+  });
+
+  client.auth.onAuthStateChange((_event, session) => {
+    showProfile(session?.user || null);
   });
 })();
 </script>
