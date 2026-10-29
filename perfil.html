@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100d10">
+  <title>Mi perfil | Poems_nath</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fondo: #100d10;
+      --panel: #191318;
+      --rojo: #a83d50;
+      --texto: #eee5e7;
+      --suave: #a99ba2;
+      --borde: #38252e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "DM Sans", sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .logo {
+      font: 28px "Cormorant Garamond", serif;
+      color: #e7bdc6;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--rojo);
+    }
+
+    header nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    a {
+      color: #d9a4b0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: white;
+    }
+
+    .pagina {
+      max-width: 850px;
+      margin: 55px auto;
+      padding: 0 22px 60px;
+    }
+
+    .encabezado {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .etiqueta {
+      color: #d77d91;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 4px;
+    }
+
+    h1, h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+    }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 55px);
+      margin: 12px 0;
+    }
+
+    .encabezado p {
+      color: var(--suave);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .tarjeta {
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      padding: 30px;
+      margin-bottom: 22px;
+    }
+
+    .vista-perfil {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      border: 2px solid #75404e;
+      object-fit: cover;
+      background: #281821;
+      display: block;
+    }
+
+    .inicial {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #351c28;
+      border: 2px solid #75404e;
+      color: #e7bdc6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 48px "Cormorant Garamond", serif;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    #nombreVisible {
+      font-size: 30px;
+      overflow-wrap: anywhere;
+    }
+
+    #bioVisible {
+      color: #c8b7bf;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+
+    .correo {
+      color: var(--suave);
+      font-size: 12px;
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .campo {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: #d9a4b0;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 13px;
+      background: var(--fondo);
+      border: 1px solid var(--borde);
+      color: var(--texto);
+      outline: none;
+      font: inherit;
+      border-radius: 2px;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--rojo);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 105px;
+      line-height: 1.6;
+    }
+
+    .ayuda {
+      display: block;
+      color: var(--suave);
+      font-size: 11px;
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+
+    button {
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .principal {
+      background: var(--rojo);
+      border: 1px solid var(--rojo);
+      color: white;
+      padding: 13px 20px;
+    }
+
+    .principal:hover {
+      background: #c15368;
+    }
+
+    .secundario {
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--texto);
+      padding: 12px 18px;
+    }
+
+    .secundario:hover {
+      border-color: #a83d50;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mensaje {
+      display: none;
+      padding: 12px;
+      margin-bottom: 18px;
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .mensaje.visible {
+      display: block;
+    }
+
+    .mensaje.error {
+      background: #35171f;
+      color: #ffc4ce;
+      border: 1px solid #703142;
+    }
+
+    .mensaje.exito {
+      background: #18271e;
+      color: #c3f0d0;
+      border: 1px solid #315840;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--suave);
+      border-top: 1px solid var(--borde);
+      padding: 25px;
+      font: italic 17px "Cormorant Garamond", serif;
+    }
+
+    @media (max-width: 520px) {
+      header {
+        padding: 18px;
+      }
+
+      header nav {
+        gap: 10px;
+        font-size: 12px;
+      }
+
+      .tarjeta {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo">versos<span>.</span></a>
+
+    <nav>
+      <a href="index.html">Poemas</a>
+      <a href="cuenta.html" id="enlaceCuenta">Mi cuenta</a>
+    </nav>
+  </header>
+
+  <main class="pagina">
+    <section class="encabezado">
+      <span class="etiqueta">Tu rincón personal</span>
+      <h1>Mi perfil.</h1>
+      <p>Un pequeño espacio para presentarte al mundo de las palabras.</p>
+    </section>
+
+    <div id="mensaje" class="mensaje" role="status" aria-live="polite"></div>
+
+    <section class="tarjeta vista-perfil">
+      <img id="avatar" class="avatar" alt="Foto de perfil" hidden>
+
+      <div id="inicial" class="inicial">P</div>
+
+      <h2 id="nombreVisible">Cargando perfil...</h2>
+      <p id="bioVisible"></p>
+      <p id="correoVisible" class="correo"></p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Personaliza tu perfil</h2>
+
+      <form id="formPerfil">
+        <div class="campo">
+          <label for="usuario">Nombre de usuario</label>
+          <input
+            id="usuario"
+            type="text"
+            minlength="3"
+            maxlength="30"
+            required
+            placeholder="Ej. poeta_nocturna"
+          >
+          <span class="ayuda">
+            Este será el nombre que te represente en Poems_nath.
+          </span>
+        </div>
+
+        <div class="campo">
+          <label for="foto">Enlace de tu foto de perfil</label>
+          <input
+            id="foto"
+            type="url"
+            maxlength="1000"
+            placeholder="https://ejemplo.com/mi-foto.jpg"
+          >
+          <span class="ayuda">
+            Opcional. Pega un enlace directo a una imagen pública.
+            No subas una contraseña ni información privada.
+          </span>
+        </div>
+
+        <div class="campo">
+          <label for="bio">Biografía</label>
+          <textarea
+            id="bio"
+            maxlength="250"
+            placeholder="Escribe algo sobre ti..."
+          ></textarea>
+          <span class="ayuda">Máximo 250 caracteres.</span>
+        </div>
+
+        <div class="acciones">
+          <button type="submit" class="principal" id="guardar">
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Tu sesión</h2>
+      <p class="correo" style="margin: 0 0 18px">
+        ¿Quieres salir de tu cuenta en este dispositivo?
+      </p>
+
+      <button type="button" class="secundario" id="cerrarSesion">
+        Cerrar sesión
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    "A veces, escribir es la única forma de decir la verdad."
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL =
+      "https://bxgcdqfcrjmyokuesiah.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_4lYU49rF9YPA6QEkhlxlWA_0p4SS1w";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const mensaje = document.getElementById("mensaje");
+    const formPerfil = document.getElementById("formPerfil");
+    const guardar = document.getElementById("guardar");
+
+    let usuarioActual = null;
+
+    function mostrarMensaje(texto, tipo) {
+      mensaje.textContent = texto;
+      mensaje.className = "mensaje visible " + tipo;
+    }
+
+    function actualizarVista(nombre, foto, bio, correo) {
+      document.getElementById("nombreVisible").textContent =
+        nombre || "Escritor/a";
+
+      document.getElementById("bioVisible").textContent =
+        bio || "Todavía no has escrito una biografía.";
+
+      document.getElementById("correoVisible").textContent =
+        correo || "";
+
+      const avatar = document.getElementById("avatar");
+      const inicial = document.getElementById("inicial");
+
+      if (foto) {
+        avatar.src = foto;
+        avatar.hidden = false;
+        inicial.hidden = true;
+
+        avatar.onerror = () => {
+          avatar.hidden = true;
+          inicial.hidden = false;
+        };
+      } else {
+        avatar.removeAttribute("src");
+        avatar.hidden = true;
+        inicial.hidden = false;
+      }
+
+      inicial.textContent =
+        (nombre || "P").trim().charAt(0).toUpperCase();
+    }
+
+    async function cargarPerfil() {
+      const { data: sesionData, error: sesionError } =
+        await supabaseClient.auth.getSession();
+
+      if (sesionError || !sesionData.session) {
+        window.location.replace("cuenta.html");
+        return;
+      }
+
+      usuarioActual = sesionData.session.user;
+
+      document.getElementById("correoVisible").textContent =
+        usuarioActual.email || "";
+
+      const { data: perfil, error } = await supabaseClient
+        .from("profiles")
+        .select("id, username, avatar_url, bio")
+        .eq("id", usuarioActual.id)
+        .maybeSingle();
+
+      if (error) {
+        mostrarMensaje(
+          "No pudimos leer tu perfil. Revisa las políticas RLS de la tabla profiles en Supabase.",
+          "error"
+        );
+
+        const nombreInicial =
+          usuarioActual.user_metadata?.username || "Escritor/a";
+
+        document.getElementById("usuario").value =
+          usuarioActual.user_metadata?.username || "";
+
+        actualizarVista(
+          nombreInicial,
+          "",
+          "",
+          usuarioActual.email
+        );
+
+        return;
+      }
+
+      const nombreGuardado =
+        perfil?.username ||
+        usuarioActual.user_metadata?.username ||
+        "";
+
+      document.getElementById("usuario").value = nombreGuardado;
+      document.getElementById("foto").value = perfil?.avatar_url || "";
+      document.getElementById("bio").value = perfil?.bio || "";
+
+      actualizarVista(
+        nombreGuardado,
+        perfil?.avatar_url || "",
+        perfil?.bio || "",
+        usuarioActual.email
+      );
+    }
+
+    formPerfil.addEventListener("submit", async (evento) => {
+      evento.preventDefault();
+
+      if (!usuarioActual) return;
+
+      const nombre = document.getElementById("usuario").value.trim();
+      const foto = document.getElementById("foto").value.trim();
+      const bio = document.getElementById("bio").value.trim();
+
+      if (nombre.length < 3) {
+        mostrarMensaje(
+          "El nombre de usuario debe tener al menos 3 caracteres.",
+          "error"
+        );
+        return;
+      }
+
+      if (foto) {
+        try {
+          const url = new URL(foto);
+
+          if (url.protocol !== "https:") {
+            mostrarMensaje(
+              "El enlace de la foto debe comenzar con https://",
+              "error"
+            );
+            return;
+          }
+        } catch {
+          mostrarMensaje("El enlace de la foto no es válido.", "error");
+          return;
+        }
+      }
+
+      guardar.disabled = true;
+      guardar.textContent = "Guardando...";
+
+      try {
+        const { error } = await supabaseClient
+          .from("profiles")
+          .upsert({
+            id: usuarioActual.id,
+            username: nombre,
+            avatar_url: foto || null,
+            bio: bio || null
+          }, {
+            onConflict: "id"
+          });
+
+        if (error) throw error;
+
+        actualizarVista(
+          nombre,
+          foto,
+          bio,
+          usuarioActual.email
+        );
+
+        mostrarMensaje("¡Perfil actualizado correctamente!", "exito");
+      } catch (error) {
+        mostrarMensaje(
+          "No se pudieron guardar los cambios: " + error.message,
+          "error"
+        );
+      } finally {
+        guardar.disabled = false;
+        guardar.textContent = "Guardar cambios";
+      }
+    });
+
+    document
+      .getElementById("cerrarSesion")
+      .addEventListener("click", async () => {
+        const boton = document.getElementById("cerrarSesion");
+        boton.disabled = true;
+
+        const { error } = await supabaseClient.auth.signOut();
+
+        if (error) {
+          mostrarMensaje(
+            "No se pudo cerrar la sesión: " + error.message,
+            "error"
+          );
+          boton.disabled = false;
+          return;
+        }
+
+        window.location.replace("cuenta.html");
+      });
+
+    cargarPerfil();
+  </script>
+</body>
+</html>
